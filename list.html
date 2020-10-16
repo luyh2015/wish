@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>卢亚辉为小公主建立的许愿箱</title>
+    <link rel="stylesheet" href="./stylesheets/base.css" />
+    <style>
+      p {
+        padding: 10px;
+        min-height: 360px;
+        border-radius: 10px;
+        color: #837362;
+        border: 1px #eae1d5 solid;
+        box-shadow: inset 0 0 10px 1px rgba(255, 255, 255, 0.6),
+          0 -2px 4px -3px rgba(0, 0, 0, 0.75), 0 2px 3px -2px rgba(0, 0, 0, 0.6);
+        animation: op 2s;
+        background: beige url(./images/bg.png);
+        background: -moz-linear-gradient(
+            top,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(163, 140, 130, 0.17) 100%
+          ),
+          url(./images/bg.png);
+        background: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            color-stop(0%, rgba(255, 255, 255, 0)),
+            color-stop(100%, rgba(163, 140, 130, 0.17))
+          ),
+          url(./images/bg.png);
+        background: -webkit-linear-gradient(
+            top,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(163, 140, 130, 0.17) 100%
+          ),
+          url(./images/bg.png);
+        background: -o-linear-gradient(
+            top,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(163, 140, 130, 0.17) 100%
+          ),
+          url(./images/bg.png);
+        background: -ms-linear-gradient(
+            top,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(163, 140, 130, 0.17) 100%
+          ),
+          url(./images/bg.png);
+      }
+      span {
+        padding: 10px;
+      }
+      .rule {
+        line-height: 26px;
+        padding-left: 20px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 大盒子 -->
+    <div class="layout">
+      <p id="content"></p>
+    </div>
+
+    <!-- /大盒子 -->
+    <!-- /浮动的按钮与标签 -->
+
+    <script src="./lib/av.js"></script>
+    <script src="./js/config.js"></script>
+    <script>
+      const query = new AV.Query('Loves');
+      query.limit(1000);
+      query.addDescending('createdAt');
+      query
+        .find()
+        .then(function(results) {
+          setString(results);
+        })
+        .catch(e => {
+          alert('网络错误');
+        });
+
+      function setString(results) {
+        const str = `
+      <h3>胡小丹小公主愿望还剩余 ${12 -
+        results.length} 次，上一次许愿时间：${results[0] && results[0].createdAt.toLocaleString()}</h3>
+      <h3>许愿箱规则如下:</h3>
+        
+        <span class="rule">1、小公主在这里留言许愿，由卢亚辉负责实现愿望。<span/><br />
+        <span class="rule">2、小公主一共可以许愿 12 次，每次都为一张二维码。<span/><br />
+        <span class="rule">3、每月最多许愿一次，意味着未来一年里可以许12次愿。<span/><br />
+        <span class="rule">4、如果本月没有许愿，则愿望可以转化成红包 520 RMB，由系统发送。<span/><br />
+        <span class="rule">5、如果本月的愿望忘记许并选择不转化红包，可存储为愿望池中，愿望池最多存储
+        5 条，多余 5 条则无效。<span/><br />
+        
+        <br />
+        `;
+        const content = document.getElementById('content');
+        let i = 0;
+        const time = setInterval(() => {
+          i++;
+          content.innerHTML = str.substring(0, i);
+          if (i == str.length) {
+            clearInterval(time);
+          }
+        }, 60);
+      }
+    </script>
+  </body>
+</html>
