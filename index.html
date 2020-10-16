@@ -88,7 +88,7 @@
               const Loves = AV.Object.extend('Loves')
               const love = new Loves()
               love.set('content', content)
-              
+              // 许愿后短信通知
               AV.Cloud.requestSmsCode({
                 mobilePhoneNumber: '18569932085',
                 name: '胡小丹小公主的许愿池',
