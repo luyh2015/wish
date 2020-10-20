@@ -90,16 +90,16 @@
 
       function setString(results) {
         const str = `
-      <h3>胡小丹小公主愿望还剩余 ${12 -
+      <h3>${new Date().getFullYear()}年胡小丹小公主愿望还剩余 ${12 -
         results.length} 次，上一次许愿时间：${results[0] && results[0].createdAt.toLocaleString()}</h3>
       <h3>许愿箱规则如下:</h3>
         
         <span class="rule">1、小公主在这里留言许愿，由卢亚辉负责实现愿望。<span/><br />
-        <span class="rule">2、小公主一共可以许愿 12 次，每次都为一张二维码。<span/><br />
-        <span class="rule">3、每月最多许愿一次，意味着未来一年里可以许12次愿。<span/><br />
+        <span class="rule">2、小公主每年一共可以许愿 12 次，每次许过愿后系统会自动短信通知卢亚辉。<span/><br />
+        <span class="rule">3、小公主每月最多许愿一次，意味着未来一年里可以许12次愿。<span/><br />
         <span class="rule">4、如果本月没有许愿，则愿望可以转化成红包 520 RMB，由系统发送。<span/><br />
-        <span class="rule">5、如果本月的愿望忘记许并选择不转化红包，可存储为愿望池中，愿望池最多存储
-        5 条，多余 5 条则无效。<span/><br />
+        <span class="rule">5、如果本月的愿望忘记许并选择不转化红包，可存储为许愿池中，许愿池最多存储
+        6 条，累计攒够 6 条则可转化为说走就走的旅行一次，目的地的由小公主定。<span/><br />
         
         <br />
         `;
